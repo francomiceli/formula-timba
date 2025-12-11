@@ -14,29 +14,27 @@
     <div
       v-if="pilotsStore.pilots.length"
       class="q-pa-lg rounded-borders"
-      style="width: 100%; max-width: 600px;"
     >
       <div v-for="pos in 10" :key="pos" class="pilot-card q-mb-sm">
         <div class="position-number">{{ pos }}</div>
 
         <div class="pilot-info">
-          <div class="pilot-name">
-            Piloto Seleccionado:
-          </div>
-        </div>
-
         <q-select
           v-model="positions[pos]"
           :options="pilotOptions"
           option-label="name"
           option-value="id"
-          label="Seleccionar Piloto"
+          :label="positions[pos] 
+           ? pilotOptions.find(p => p.id === positions[pos])?.name 
+           : 'Seleccionar Piloto'"
           dense
           filled
           :disable="predictionSubmitting"
           @update:model-value="validateUniquePilots(pos)"
-          class="pilot-select"
         />
+        </div>
+
+
       </div>
     </div>
 
