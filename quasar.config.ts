@@ -44,7 +44,7 @@ export default defineConfig((ctx) => {
         // extendTsConfig (tsConfig) {}
       },
 
-      vueRouterMode: 'hash', // available values: 'hash', 'history'
+      vueRouterMode: 'history', // available values: 'hash', 'history'
       // vueRouterBase,
       // vueDevtools,
       // vueOptionsAPI: false,
@@ -103,7 +103,24 @@ export default defineConfig((ctx) => {
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-file#framework
     framework: {
-      config: {},
+      config: {
+        dark: true, // activa el modo oscuro por defecto
+        brand: {
+        primary: '#e10600',        // rojo F1 -> --color-accent
+        secondary: '#ff3b30',      // rojo claro/acento -> --color-accent-light
+        accent: '#e10600',         // rojo F1, para highlights
+        dark: '#0e0e0f',           // fondo principal -> --color-bg
+        surface: '#16181d',        // cards, contenedores -> --color-surface
+        positive: '#28a745',       // verde positivo -> --color-track
+        negative: '#1e7d32',       // verde oscuro -> --color-track-dark
+        info: '#9ca3af',           // textos secundarios -> --color-text-muted
+        warning: '#ff3b30',        // color de advertencias
+        error: '#ff3b30',          // color de errores
+        onPrimary: '#f2f2f2',      // texto sobre primary -> --color-text
+        onSecondary: '#f2f2f2',    // texto sobre secondary
+        onSurface: '#f2f2f2',      // texto general -> --color-text
+        }
+      },
 
       // iconSet: 'material-icons', // Quasar icon set
       // lang: 'en-US', // Quasar language pack
