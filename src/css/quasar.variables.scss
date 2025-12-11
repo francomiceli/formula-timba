@@ -24,14 +24,14 @@ $negative: #c10015;
 $info: #31ccec;
 $warning: #f2c037;
 
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
 
-$font-display: 'Orbitron', sans-serif;
-$font-body: 'Roboto', sans-serif;
+$font-display: "Roboto Condensed", sans-serif;
+$font-body: "Roboto Condensed", sans-serif;
 
 /* Tipografía */
 body {
-  font-family: 'Orbitron', sans-serif;
+  font-family: $font-display;
   background-color: #121212;
   color: #FFFFFF;
 }
@@ -39,7 +39,7 @@ body {
 /* Botones por defecto */
 .q-btn {
   border-radius: 12px;
-  font-family: 'Orbitron', sans-serif;
+  font-family: $font-display;
 }
 
 /* Cards */

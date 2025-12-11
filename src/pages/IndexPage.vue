@@ -115,7 +115,6 @@ onMounted(async() => {
   border-radius: 12px;
   padding: 12px 16px;
   gap: 16px;
-  font-family: 'Orbitron', sans-serif;
   transition: transform 0.2s, border-color 0.2s;
   border-left: 6px solid #FF0000; /* borde primario rojo F1 */
 }

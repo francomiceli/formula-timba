@@ -4,7 +4,7 @@
     <q-header elevated class="f1-header">
       <q-toolbar>
         <q-toolbar-title class="f1-title">
-          Formula 1 Predictions
+          Formula Timba
         </q-toolbar-title>
         <!-- Aquí podés agregar botones si querés, por ejemplo menú o logout -->
       </q-toolbar>
@@ -25,7 +25,6 @@
 .f1-header {
   background-color: #121212;
   border-bottom: 4px solid #FF0000;
-  font-family: 'Orbitron', sans-serif;
 }
 
 .f1-title {
