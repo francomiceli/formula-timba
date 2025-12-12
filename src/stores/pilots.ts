@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
-import axios from "axios";
+import { api } from 'src/boot/axios'; 
 
 export interface Pilot {
   id: number;
@@ -25,9 +25,8 @@ export const usePilotsStore = defineStore("pilots", () => {
     loading.value = true;
     error.value = null;
     try {
-      const res = await axios.get<Pilot[]>("http://localhost:3000/api/pilots");
+      const res = await api.get<Pilot[]>("/api/pilots");
       pilots.value = res.data;
-      console.log(pilots.value);
 } catch (err: unknown) {
   if (err instanceof Error) {
     error.value = err.message;

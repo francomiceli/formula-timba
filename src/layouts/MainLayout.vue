@@ -1,16 +1,21 @@
+
 <template>
   <q-layout view="lHh Lpr lFf">
-    <!-- HEADER -->
-    <q-header elevated class="f1-header">
+    <q-header elevated class="bg-primary text-white">
       <q-toolbar>
-        <q-toolbar-title class="f1-title">
-          Formula Timba
+        <q-toolbar-title>
+          🏎️ Fórmula Timba
         </q-toolbar-title>
-        <!-- Aquí podés agregar botones si querés, por ejemplo menú o logout -->
+
+        <div class="q-gutter-sm row items-center">
+          <q-btn flat icon="person" :label="authStore.user?.username || 'Usuario'" />
+          <q-btn flat round icon="logout" @click="handleLogout">
+            <q-tooltip>Cerrar sesión</q-tooltip>
+          </q-btn>
+        </div>
       </q-toolbar>
     </q-header>
 
-    <!-- PAGE CONTAINER -->
     <q-page-container>
       <router-view />
     </q-page-container>
@@ -18,18 +23,14 @@
 </template>
 
 <script setup lang="ts">
+import { useRouter } from 'vue-router';
+import { useAuthStore } from 'src/stores/auth';
 
+const router = useRouter();
+const authStore = useAuthStore();
+
+async function handleLogout() {
+  authStore.logout();
+  await router.push('/login');
+}
 </script>
-
-<style scoped>
-.f1-header {
-  background-color: #121212;
-  border-bottom: 4px solid #FF0000;
-}
-
-.f1-title {
-  font-weight: bold;
-  font-size: 1.5rem;
-  color: #FF0000;
-}
-</style>

@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import axios from "axios";
+import { api } from 'src/boot/axios'; 
 import { ref } from "vue";
 
 export const usePredictionStore = defineStore("prediction", () => {
@@ -13,7 +13,7 @@ export const usePredictionStore = defineStore("prediction", () => {
         success.value = false;
 
         try {
-            await axios.post("http://localhost:3000/api/predictions", {
+            await api.post("/api/predictions", {
                 prediction,
             });
             success.value = true;

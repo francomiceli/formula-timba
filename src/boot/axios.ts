@@ -8,24 +8,57 @@ declare module 'vue' {
   }
 }
 
-// Be careful when using SSR for cross-request state pollution
-// due to creating a Singleton instance here;
-// If any client changes this (global) instance, it might be a
-// good idea to move this instance creation inside of the
-// "export default () => {}" function below (which runs individually
-// for each client)
-const api = axios.create({ baseURL: 'https://api.example.com' });
+// Crear instancia de axios
+const api = axios.create({ 
+  baseURL: 'http://localhost:3000' 
+});
+
+// ⚠️ IMPORTANTE: Interceptor para agregar token automáticamente
+api.interceptors.request.use(
+  (config) => {
+    // Rutas públicas que NO necesitan token
+    const publicRoutes = ['/api/auth/login', '/api/auth/register'];
+    const isPublicRoute = publicRoutes.some(route => config.url?.includes(route));
+    
+    if (!isPublicRoute) {
+      const token = localStorage.getItem('token');
+      if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+        console.log('🎫 Token agregado al request:', config.url);
+      } else {
+        console.log('⚠️ No hay token en localStorage para:', config.url);
+      }
+    } else {
+      console.log('🔓 Ruta pública (sin token):', config.url);
+    }
+    
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error instanceof Error ? error : new Error(String(error)));
+  }
+);
+
+// Interceptor para manejar errores 401
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    // Rutas donde NO queremos redireccionar automáticamente
+    const noRedirectRoutes = ['/api/auth/login', '/api/auth/register', '/api/auth/me'];
+    const isNoRedirectRoute = noRedirectRoutes.some(route => error.config?.url?.includes(route));
+    
+    if (error.response?.status === 401 && !isNoRedirectRoute) {
+      console.log('❌ Error 401 - Redirigiendo a login');
+      localStorage.removeItem('token');
+      window.location.href = '/login';
+    }
+    return Promise.reject(error instanceof Error ? error : new Error(String(error)));
+  }
+);
 
 export default defineBoot(({ app }) => {
-  // for use inside Vue files (Options API) through this.$axios and this.$api
-
   app.config.globalProperties.$axios = axios;
-  // ^ ^ ^ this will allow you to use this.$axios (for Vue Options API form)
-  //       so you won't necessarily have to import axios in each vue file
-
   app.config.globalProperties.$api = api;
-  // ^ ^ ^ this will allow you to use this.$api (for Vue Options API form)
-  //       so you can easily perform requests against your app's API
 });
 
 export { api };
