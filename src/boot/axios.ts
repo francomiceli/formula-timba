@@ -8,16 +8,28 @@ declare module 'vue' {
   }
 }
 
+// Detectar automáticamente el entorno
+const getBaseURL = () => {
+  // En producción, usa la misma URL del sitio + /api
+  if (import.meta.env.PROD) {
+    return `${window.location.origin}/api`;
+  }
+  // En desarrollo, usa localhost
+  return 'http://localhost:3000';
+};
+
 // Crear instancia de axios
 const api = axios.create({ 
-  baseURL: 'http://localhost:3000' 
+  baseURL: getBaseURL()
 });
+
+console.log('🌐 API Base URL:', getBaseURL());
 
 // ⚠️ IMPORTANTE: Interceptor para agregar token automáticamente
 api.interceptors.request.use(
   (config) => {
     // Rutas públicas que NO necesitan token
-    const publicRoutes = ['/api/auth/login', '/api/auth/register'];
+    const publicRoutes = ['/auth/login', '/auth/register']; // Sin /api/
     const isPublicRoute = publicRoutes.some(route => config.url?.includes(route));
     
     if (!isPublicRoute) {
@@ -44,7 +56,7 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     // Rutas donde NO queremos redireccionar automáticamente
-    const noRedirectRoutes = ['/api/auth/login', '/api/auth/register', '/api/auth/me'];
+    const noRedirectRoutes = ['/auth/login', '/auth/register', '/auth/me']; // Sin /api/
     const isNoRedirectRoute = noRedirectRoutes.some(route => error.config?.url?.includes(route));
     
     if (error.response?.status === 401 && !isNoRedirectRoute) {
