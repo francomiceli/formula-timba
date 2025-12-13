@@ -4,7 +4,7 @@
     <q-header elevated class="bg-primary text-white">
       <q-toolbar>
         <q-toolbar-title>
-          🏎️ Fórmula Timba
+          🏎️ Apex League
         </q-toolbar-title>
 
         <div class="q-gutter-sm row items-center">

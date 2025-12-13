@@ -2,7 +2,7 @@
   <q-page class="flex flex-center" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
     <q-card class="login-card q-pa-lg shadow-10">
       <q-card-section class="text-center">
-        <div class="text-h4 text-weight-bold q-mb-md">🏎️ F1 Predictions</div>
+        <div class="text-h4 text-weight-bold q-mb-md">🏎️ Apex League</div>
         <div class="text-h6 text-grey-7">{{ isLogin ? 'Iniciar Sesión' : 'Crear Cuenta' }}</div>
       </q-card-section>
 
