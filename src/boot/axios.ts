@@ -9,17 +9,10 @@ declare module 'vue' {
 }
 
 // Detectar automáticamente el entorno
-const getBaseURL = () => {
-  console.log('🔍 Environment:', {
-    PROD: import.meta.env.PROD,
-    DEV: import.meta.env.DEV,
-    MODE: import.meta.env.MODE,
-    origin: window.location.origin
-  });
-  
-  // En producción, usa la misma URL del sitio + /api
+const getBaseURL = () => { 
+  // En producción, usa la misma URL del sitio
   if (import.meta.env.PROD) {
-    return `${window.location.origin}/api`;
+    return `${window.location.origin}`;
   }
   // En desarrollo, usa localhost
   return 'http://localhost:3000';
