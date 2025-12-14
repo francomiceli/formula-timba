@@ -3,12 +3,17 @@
   <q-layout view="lHh Lpr lFf">
     <q-header elevated class="bg-primary text-white">
       <q-toolbar>
-        <q-toolbar-title>
+        <q-toolbar-title shrink @click="goToIndex">
           🏎️ Apex League
         </q-toolbar-title>
 
         <div class="q-gutter-sm row items-center">
-          <q-btn flat icon="person" :label="authStore.user?.username || 'Usuario'" />
+          <q-btn flat label="Inicio" @click="goToIndex" />
+          <q-btn flat label="Ligas" @click="goToLeagues" />
+        </div>
+
+        <div v-if="authStore.user" class="q-gutter-sm q-ml-auto row items-center">
+          <q-btn flat icon="person" :label="authStore.user?.username" />
           <q-btn flat round icon="logout" @click="handleLogout">
             <q-tooltip>Cerrar sesión</q-tooltip>
           </q-btn>
@@ -32,5 +37,13 @@ const authStore = useAuthStore();
 async function handleLogout() {
   authStore.logout();
   await router.push('/login');
+}
+
+async function goToIndex() {
+  await router.push('/');
+}
+
+async function goToLeagues() {
+  await router.push('/leagues');
 }
 </script>
