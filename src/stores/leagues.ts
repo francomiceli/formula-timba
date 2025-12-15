@@ -155,7 +155,13 @@ export const useLeaguesStore = defineStore('leagues', () => {
     try {
       const response = await api.get(`/api/leagues/${slug}/next-event`);
       nextEvent.value = response.data;
-    } catch (err: unknown) {
+    }  catch (err: unknown) {
+  if (err instanceof Error) {
+    error.value = err.message;
+  } else {
+    error.value = "Error desconocido";
+  }
+        
       // Datos de ejemplo
       nextEvent.value = {
         id: 1,
@@ -176,7 +182,12 @@ export const useLeaguesStore = defineStore('leagues', () => {
         // Cargar posiciones existentes
         currentPrediction.value = { ...response.data.positions };
       }
-    } catch (err: unknown) {
+        }  catch (err: unknown) {
+  if (err instanceof Error) {
+    error.value = err.message;
+  } else {
+    error.value = "Error desconocido";
+  }
       existingPrediction.value = null;
       currentPrediction.value = {};
     }
@@ -186,7 +197,12 @@ export const useLeaguesStore = defineStore('leagues', () => {
     try {
       const response = await api.get('/api/pilots');
       pilots.value = response.data || [];
-    } catch (err: unknown) {
+    }  catch (err: unknown) {
+  if (err instanceof Error) {
+    error.value = err.message;
+  } else {
+    error.value = "Error desconocido";
+  }
       // Datos de ejemplo
       pilots.value = getDefaultPilots();
     }
@@ -208,7 +224,12 @@ export const useLeaguesStore = defineStore('leagues', () => {
         currentLeague.value.isJoined = true;
       }
       return true;
-    } catch (err: unknown) {
+        }  catch (err: unknown) {
+  if (err instanceof Error) {
+    error.value = err.message;
+  } else {
+    error.value = "Error desconocido";
+  }
       // Simular éxito para desarrollo
       const league = availableLeagues.value.find(l => l.slug === slug);
       if (league) {
@@ -282,7 +303,12 @@ export const useLeaguesStore = defineStore('leagues', () => {
       }
 
       return true;
-    } catch (err: unknown) {
+    }  catch (err: unknown) {
+  if (err instanceof Error) {
+    error.value = err.message;
+  } else {
+    error.value = "Error desconocido";
+  }
       // Simular éxito para desarrollo
       success.value = true;
       if (nextEvent.value) {

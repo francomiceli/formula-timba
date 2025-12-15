@@ -236,10 +236,10 @@
               <!-- 2nd Place -->
               <div class="podium-item second">
                 <div class="podium-avatar">
-                  <span>{{ getInitial(leagueRankings[1].username) }}</span>
+                  <span>{{ getInitial(leagueRankings[1]!.username) }}</span>
                 </div>
-                <span class="podium-name">{{ leagueRankings[1].username }}</span>
-                <span class="podium-points">{{ leagueRankings[1].points }} pts</span>
+                <span class="podium-name">{{ leagueRankings[1]!.username }}</span>
+                <span class="podium-points">{{ leagueRankings[1]!.points }} pts</span>
                 <div class="podium-base">
                   <span class="podium-rank">2</span>
                 </div>
@@ -249,10 +249,10 @@
               <div class="podium-item first">
                 <q-icon name="workspace_premium" class="crown-icon" />
                 <div class="podium-avatar gold">
-                  <span>{{ getInitial(leagueRankings[0].username) }}</span>
+                  <span>{{ getInitial(leagueRankings[0]!.username) }}</span>
                 </div>
-                <span class="podium-name">{{ leagueRankings[0].username }}</span>
-                <span class="podium-points">{{ leagueRankings[0].points }} pts</span>
+                <span class="podium-name">{{ leagueRankings[0]!.username }}</span>
+                <span class="podium-points">{{ leagueRankings[0]!.points }} pts</span>
                 <div class="podium-base">
                   <span class="podium-rank">1</span>
                 </div>
@@ -261,10 +261,10 @@
               <!-- 3rd Place -->
               <div class="podium-item third">
                 <div class="podium-avatar">
-                  <span>{{ getInitial(leagueRankings[2].username) }}</span>
+                  <span>{{ getInitial(leagueRankings[2]!.username) }}</span>
                 </div>
-                <span class="podium-name">{{ leagueRankings[2].username }}</span>
-                <span class="podium-points">{{ leagueRankings[2].points }} pts</span>
+                <span class="podium-name">{{ leagueRankings[2]!.username }}</span>
+                <span class="podium-points">{{ leagueRankings[2]!.points }} pts</span>
                 <div class="podium-base">
                   <span class="podium-rank">3</span>
                 </div>
