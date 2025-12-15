@@ -33,5 +33,25 @@ export default defineRouter(function (/* { store, ssrContext } */) {
     history: createHistory(process.env.VUE_ROUTER_BASE),
   });
 
+  // Navigation guard para proteger rutas
+  Router.beforeEach((to, _from, next) => {
+    const token = localStorage.getItem('token');
+    const isAuthenticated = !!token;
+
+    // Si la ruta requiere autenticación y no está logueado
+    if (to.meta.requiresAuth && !isAuthenticated) {
+      next({ name: 'login' });
+      return;
+    }
+
+    // Si es una ruta para invitados (login) y ya está logueado
+    if (to.meta.guest && isAuthenticated) {
+      next({ name: 'dashboard' });
+      return;
+    }
+
+    next();
+  });
+
   return Router;
 });
